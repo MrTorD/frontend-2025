@@ -54,11 +54,11 @@ function changePosition(p: Presentation, firstSlide: Slide, secondIndex: number)
 }
 
 function addText(s: Slide, pos: Position, text: string, font: string) {
-    let textField: TextField;
-    textField!.text = text;
-    textField!.pos = pos;
-    textField!.font = font;
-    s.textFields.push(textField!);
+    let t: TextField;
+    t!.text = text;
+    t!.pos = pos;
+    t!.font = font;
+    s.textFields.push(t!);
 }
 
 function deleteText(s: Slide, t: TextField) {
