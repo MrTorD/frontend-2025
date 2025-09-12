@@ -1,4 +1,4 @@
-console.log("Expected: 102, recieved: ", calc("+ 5000 40000"));
+console.log("Expected: 55020, recieved: ", calc("+ 5120 49900"));
 console.log("Expected: 53, recieved:", calc("+ 5 (* 6 8)"));
 console.log("Expected: 2, recieved: ",calc("/ 12 + 3 (- 9 6)"));
 console.log("Expected: 4928, recieved:", calc("* (+ 425 23) - (14 * / 2 4 6)"));

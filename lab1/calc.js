@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-console.log("Expected: 102, recieved: ", calc("+ 5000 40000"));
+console.log("Expected: 55020, recieved: ", calc("+ 5120 49900"));
 console.log("Expected: 53, recieved:", calc("+ 5 (* 6 8)"));
 console.log("Expected: 2, recieved: ", calc("/ 12 + 3 (- 9 6)"));
 console.log("Expected: 4928, recieved:", calc("* (+ 425 23) - (14 * / 2 4 6)"));
@@ -8,7 +8,7 @@ console.log("Expected: undefined, recieved:", calc("+ 5 5 5"));
 console.log("Expected: undefined, recieved:", calc("2 / 4"));
 console.log("Expected: undefined, recieved:", calc("/ 10 * 5 + 4"));
 function readNum(str) {
-    let arr = [];
+    const arr = [];
     let ch;
     for (let i = 0; i < str.length; i++) {
         ch = str[i];
@@ -29,7 +29,7 @@ function readNum(str) {
 function calc(expression) {
     if (expression)
         expression = expression.split('').reverse().join('');
-    let stack = [];
+    const stack = [];
     let ch;
     let num;
     while (expression) {
@@ -46,7 +46,7 @@ function calc(expression) {
         if (ch)
             handleChar(ch, stack);
     }
-    let result = stack.pop();
+    const result = stack.pop();
     return (result && stack.length == 0) ? result : undefined;
 }
 function handleChar(ch, stack) {
