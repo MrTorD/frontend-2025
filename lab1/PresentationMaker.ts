@@ -55,7 +55,7 @@ function changeName(p: Presentation, name: string) {
 }
 
 function addSlide(p: Presentation, index: number, background: Color | Picture) {
-    let slide = {index, background, slideObjects: []}
+    const slide = {index, background, slideObjects: []}
     p.slides.push(slide);
 }
 
@@ -64,18 +64,18 @@ function removeSlide(p: Presentation, i: number) {
 }
 
 function changePosition(p: Presentation, i1: number, i2: number) {
-    let s1 = p.slides.find(s => s.index = i1);
-    let s2 = p.slides.find(s => s.index = i2);
+    const s1 = p.slides.find(s => s.index = i1);
+    const s2 = p.slides.find(s => s.index = i2);
     if (s1 && s2) {
-        let temp = i1;
+        const temp = i1;
         s1.index = s2.index;
         s2.index = temp;
     }
 }
 
 function addText(s: Slide, x: number, y: number, w: number, h: number, text: string, font: string, size: number) {
-    let pos = {x, y, w, h};
-    let t: TextField = {text, pos, font, size, type: 'text', id: crypto.randomUUID()};
+    const pos = {x, y, w, h};
+    const t: TextField = {text, pos, font, size, type: 'text', id: crypto.randomUUID()};
     s.slideObjects.push(t);
 }
 
@@ -84,8 +84,8 @@ function deleteObj(s: Slide, id: string) {
 }
 
 function addImage(s: Slide, x: number, y: number, w: number, h: number, src: string) {
-    let pos: Position = {x, y, w, h};
-    let image: Image = {pos, type: 'image', src, id: crypto.randomUUID()};
+    const pos: Position = {x, y, w, h};
+    const image: Image = {pos, type: 'image', src, id: crypto.randomUUID()};
     s.slideObjects.push(image);
 }
 

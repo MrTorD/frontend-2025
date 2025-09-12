@@ -7,7 +7,7 @@ console.log("Expected: undefined, recieved:", calc("2 / 4"));
 console.log("Expected: undefined, recieved:", calc("/ 10 * 5 + 4"));
 
 function readNum(str: string) : number | undefined {
-    let arr: number[] = [];
+    const arr: number[] = [];
     let ch: string | undefined;
 
     for (let i = 0; i < str.length; i++) {
@@ -30,7 +30,7 @@ function readNum(str: string) : number | undefined {
 
 function calc(expression: string | undefined) : number | undefined {
     if (expression) expression = expression.split('').reverse().join('');
-    let stack:number[] = [];
+    const stack: number[] = [];
     let ch: string | undefined;
     let num: number | undefined;
 
@@ -47,7 +47,7 @@ function calc(expression: string | undefined) : number | undefined {
         if (ch!) handleChar(ch, stack);
     }
 
-    let result: number | undefined = stack.pop();
+    const result: number | undefined = stack.pop();
     return (result && stack.length == 0) ? result : undefined;
 }
 
