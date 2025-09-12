@@ -1,65 +1,81 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const readline = require('readline');
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-rl.on('line', (input) => {
-    console.log(`Result is: ${calc(input)}`);
-    rl.close();
-});
+console.log("Expected: 102, recieved: ", calc("+ 5000 40000"));
+console.log("Expected: 53, recieved:", calc("+ 5 (* 6 8)"));
+console.log("Expected: 2, recieved: ", calc("/ 12 + 3 (- 9 6)"));
+console.log("Expected: 4928, recieved:", calc("* (+ 425 23) - (14 * / 2 4 6)"));
+console.log("Expected: undefined, recieved:", calc("+ 5 5 5"));
+console.log("Expected: undefined, recieved:", calc("2 / 4"));
+console.log("Expected: undefined, recieved:", calc("/ 10 * 5 + 4"));
+function readNum(str) {
+    let arr = [];
+    let ch;
+    for (let i = 0; i < str.length; i++) {
+        ch = str[i];
+        if (!Number.isNaN(parseInt(ch))) {
+            arr.push(+ch);
+            continue;
+        }
+        break;
+    }
+    if (arr.length == 0)
+        return undefined;
+    let num = 0;
+    for (let i = arr.length - 1; i >= 0; i--) {
+        num = num * 10 + arr[i];
+    }
+    return num;
+}
 function calc(expression) {
     if (expression)
         expression = expression.split('').reverse().join('');
     let stack = [];
     let ch;
+    let num;
     while (expression) {
-        ch = expression[0];
-        expression = expression.slice(1);
-        let isSuccessed = true;
-        (ch && !Number.isNaN(+ch)) ? stack.push(+ch) : isSuccessed = handleChar(ch, stack);
-        if (!isSuccessed)
-            return 'Wrong expression';
+        num = readNum(expression);
+        if (!Number.isNaN(num) && num !== undefined) {
+            expression = expression.slice(num.toString().length);
+        }
+        else {
+            ch = expression[0];
+            expression = expression.slice(1);
+        }
+        if (num)
+            stack.push(num);
+        if (ch)
+            handleChar(ch, stack);
     }
     let result = stack.pop();
-    if (result && stack.length == 0) {
-        return result;
-    }
-    else {
-        return 'Wrong expression';
-    }
+    return (result && stack.length == 0) ? result : undefined;
 }
 function handleChar(ch, stack) {
     if (!ch)
         return false;
     let a;
     let b;
-    if (stack.length >= 2) {
-        a = stack.pop();
-        b = stack.pop();
-    }
-    else {
-        return false;
-    }
     switch (ch) {
         case '+':
+            a = stack.pop();
+            b = stack.pop();
             stack.push(a + b);
             break;
         case '-':
+            a = stack.pop();
+            b = stack.pop();
             stack.push(a - b);
             break;
         case '*':
+            a = stack.pop();
+            b = stack.pop();
             stack.push(a * b);
             break;
         case '/':
+            a = stack.pop();
+            b = stack.pop();
             stack.push(a / b);
             break;
         default:
-            if (a)
-                stack.push(a);
-            if (b)
-                stack.push(b);
             break;
     }
     return true;

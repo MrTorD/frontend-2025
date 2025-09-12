@@ -6,32 +6,49 @@ type Presentation = {
 type Slide = {
     index: number;
     textFields: TextField[];
-    pictures: Picture[];
-    background: Picture;
+    images: Image[];
+    background: Picture | Color;
 }
 
 type Selection = {
-    pos: Position;
+    selectedSlideId: string[];
+    selectedObjId: string[];
 }
 
-type TextField = {
-    pos: Position;
-    text: string;
-    font: string;
-    size: number;
-}
-
-type Position = {
-    x1: number;
-    y1: number;
-    x2: number;
-    y2: number;
+type Color = {
+    type: 'color';
+    color: string;
 }
 
 type Picture = {
-    pos: Position;
-    url: string;
+    type: 'picture';
+    src: string;
 }
+
+type Image = Object & {
+    type: 'image';
+    src: string;
+}
+
+type TextField = Object & {
+    text: string;
+    font: string;
+    size: number;
+    type: 'text';
+}
+
+type Position = {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+}
+
+type Object = {
+    pos: Position;
+    id: string;
+}
+
 
 function changeName(p: Presentation, name: string) {
     p.name = name;
@@ -65,20 +82,20 @@ function deleteText(s: Slide, t: TextField) {
     s.textFields.filter((text) => text !== t);
 }
 
-function addPicture(s: Slide, picture: Picture) {
-    s.pictures.push(picture);
+function addImage(s: Slide, image: Image) {
+    s.images.push(image);
 }
 
-function deletePicture(s: Slide, picture: Picture) {
-    s.pictures.filter((p) => p !== picture);
+function deleteImage(s: Slide, image: Image) {
+    s.images.filter((i) => i !== image);
 }
 
 function changeTextPosition(t: TextField, pos: Position) {
     t.pos = pos;
 }
 
-function changePicturePositon(p: Picture, pos: Position) {
-    p.pos = pos;
+function changeImagePositon(i: Image, pos: Position) {
+    i.pos = pos;
 }
 
 function editText(t: TextField, text: string) {
