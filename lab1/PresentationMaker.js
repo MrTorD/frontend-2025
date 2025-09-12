@@ -3,34 +3,34 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function changeName(p, name) {
     p.name = name;
 }
-function addSlide(p, slide) {
+function addSlide(p, index, background) {
+    let slide = { index, background, slideObjects: [] };
     p.slides.push(slide);
 }
-function removeSlide(p, slide) {
-    p.slides.filter((s) => s !== slide);
+function removeSlide(p, i) {
+    p.slides.filter((s) => s.index !== i);
 }
-function changePosition(p, firstSlide, secondIndex) {
-    let secondSlide = p.slides.find((s) => s.index == secondIndex);
-    if (secondSlide) {
-        secondSlide.index = firstSlide.index;
-        firstSlide.index = secondIndex;
+function changePosition(p, i1, i2) {
+    let s1 = p.slides.find(s => s.index = i1);
+    let s2 = p.slides.find(s => s.index = i2);
+    if (s1 && s2) {
+        let temp = i1;
+        s1.index = s2.index;
+        s2.index = temp;
     }
 }
-function addText(s, pos, text, font) {
-    let t;
-    t.text = text;
-    t.pos = pos;
-    t.font = font;
-    s.textFields.push(t);
+function addText(s, x, y, w, h, text, font, size) {
+    let pos = { x, y, w, h };
+    let t = { text, pos, font, size, type: 'text', id: crypto.randomUUID() };
+    s.slideObjects.push(t);
 }
-function deleteText(s, t) {
-    s.textFields.filter((text) => text !== t);
+function deleteObj(s, id) {
+    s.slideObjects.filter((o) => o.id !== id);
 }
-function addImage(s, image) {
-    s.images.push(image);
-}
-function deleteImage(s, image) {
-    s.images.filter((i) => i !== image);
+function addImage(s, x, y, w, h, src) {
+    let pos = { x, y, w, h };
+    let image = { pos, type: 'image', src, id: crypto.randomUUID() };
+    s.slideObjects.push(image);
 }
 function changeTextPosition(t, pos) {
     t.pos = pos;
@@ -47,7 +47,10 @@ function changeTextSize(t, size) {
 function changeFont(t, font) {
     t.font = font;
 }
-function changeBackground(s, background) {
-    s.background = background;
+function changeBackground(s, str, type) {
+    if (type == 'color')
+        s.background = { color: str, type: 'color' };
+    if (type == 'picture')
+        s.background = { src: str, type: 'picture' };
 }
 //# sourceMappingURL=PresentationMaker.js.map

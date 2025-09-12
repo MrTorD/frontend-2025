@@ -5,8 +5,7 @@ type Presentation = {
 
 type Slide = {
     index: number;
-    textFields: TextField[];
-    images: Image[];
+    slideObjects: SlideObject[];
     background: Picture | Color;
 }
 
@@ -44,50 +43,50 @@ type Position = {
     h: number;
 }
 
+type SlideObject = TextField | Image;
+
 type Object = {
     pos: Position;
     id: string;
 }
 
-
 function changeName(p: Presentation, name: string) {
     p.name = name;
 }
 
-function addSlide(p: Presentation, slide: Slide) {
+function addSlide(p: Presentation, index: number, background: Color | Picture) {
+    let slide = {index, background, slideObjects: []}
     p.slides.push(slide);
 }
 
-function removeSlide(p: Presentation, slide: Slide) {
-    p.slides.filter((s) => s !== slide);
+function removeSlide(p: Presentation, i: number) {
+    p.slides.filter((s) => s.index !== i);
 }
 
-function changePosition(p: Presentation, firstSlide: Slide, secondIndex: number) {
-    let secondSlide: Slide | undefined = p.slides.find((s) => s.index == secondIndex);
-    if (secondSlide) {
-        secondSlide.index = firstSlide.index;
-        firstSlide.index = secondIndex;
+function changePosition(p: Presentation, i1: number, i2: number) {
+    let s1 = p.slides.find(s => s.index = i1);
+    let s2 = p.slides.find(s => s.index = i2);
+    if (s1 && s2) {
+        let temp = i1;
+        s1.index = s2.index;
+        s2.index = temp;
     }
 }
 
-function addText(s: Slide, pos: Position, text: string, font: string) {
-    let t: TextField;
-    t!.text = text;
-    t!.pos = pos;
-    t!.font = font;
-    s.textFields.push(t!);
+function addText(s: Slide, x: number, y: number, w: number, h: number, text: string, font: string, size: number) {
+    let pos = {x, y, w, h};
+    let t: TextField = {text, pos, font, size, type: 'text', id: crypto.randomUUID()};
+    s.slideObjects.push(t);
 }
 
-function deleteText(s: Slide, t: TextField) {
-    s.textFields.filter((text) => text !== t);
+function deleteObj(s: Slide, id: string) {
+    s.slideObjects.filter((o) => o.id !== id);
 }
 
-function addImage(s: Slide, image: Image) {
-    s.images.push(image);
-}
-
-function deleteImage(s: Slide, image: Image) {
-    s.images.filter((i) => i !== image);
+function addImage(s: Slide, x: number, y: number, w: number, h: number, src: string) {
+    let pos: Position = {x, y, w, h};
+    let image: Image = {pos, type: 'image', src, id: crypto.randomUUID()};
+    s.slideObjects.push(image);
 }
 
 function changeTextPosition(t: TextField, pos: Position) {
@@ -110,6 +109,7 @@ function changeFont(t: TextField, font: string) {
     t.font = font;
 }
 
-function changeBackground(s: Slide, background: Picture) {
-    s.background = background;
+function changeBackground(s: Slide, str: string, type: string) {
+    if (type == 'color') s.background = {color: str, type: 'color'};
+    if (type == 'picture') s.background = {src: str, type: 'picture'};
 }
