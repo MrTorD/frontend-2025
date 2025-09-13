@@ -1,5 +1,6 @@
-console.log("Expected: 55020, recieved: ", calc("+ 5120 49900"));
-console.log("Expected: 53, recieved:", calc("+ 5 (* 6 8)"));
+console.log("Exprected: 0, recieved:", calc("- -1 -1"));
+console.log("Expected: 44780, recieved: ", calc("+ -5120 49900"));
+console.log("Expected: -43, recieved:", calc("+ 5 (* -6 8)"));
 console.log("Expected: 2, recieved: ",calc("/ 12 + 3 (- 9 6)"));
 console.log("Expected: 4928, recieved:", calc("* (+ 425 23) - (14 * / 2 4 6)"));
 console.log("Expected: undefined, recieved:", calc("+ 5 5 5"));
@@ -9,6 +10,7 @@ console.log("Expected: undefined, recieved:", calc("/ 10 * 5 + 4"));
 function readNum(str: string) : number | undefined {
     const arr: number[] = [];
     let ch: string | undefined;
+    let isNegative: boolean = false;
 
     for (let i = 0; i < str.length; i++) {
         ch = str[i];
@@ -16,6 +18,7 @@ function readNum(str: string) : number | undefined {
             arr.push(+ch!);
             continue;
         }
+        if (ch == '-') isNegative = true;
         break;
     }
     if (arr.length == 0) return undefined;
@@ -25,7 +28,7 @@ function readNum(str: string) : number | undefined {
         num = num * 10 + arr[i]!;
     }
 
-    return num;
+    return (isNegative) ? -num : num;
 }
 
 function calc(expression: string | undefined) : number | undefined {
@@ -48,10 +51,10 @@ function calc(expression: string | undefined) : number | undefined {
     }
 
     const result: number | undefined = stack.pop();
-    return (result && stack.length == 0) ? result : undefined;
+    return (!Number.isNaN(result) && stack.length == 0) ? result : undefined;
 }
 
-function handleChar(ch: string | undefined, stack: number[], expression) : boolean {
+function handleChar(ch: string | undefined, stack: number[], expression: string) : boolean {
     if (!ch) return false;
 
     let a: number | undefined;
@@ -64,11 +67,6 @@ function handleChar(ch: string | undefined, stack: number[], expression) : boole
             stack.push(a! + b!);
             break;
         case '-':
-            if (!isNaN(parseInt(expression[0]))) {
-                a = stack.pop();
-                stack.push(a!);
-                break;
-            }
             a = stack.pop();
             b = stack.pop();
             stack.push(a! - b!);
