@@ -4,7 +4,7 @@ console.log("Exprected: 0, recieved:", calc("- -1 -1"));
 console.log("Expected: 44780, recieved: ", calc("+ -5120 49900"));
 console.log("Expected: -43, recieved:", calc("+ 5 (* -6 8)"));
 console.log("Expected: 2, recieved: ", calc("/ 12 + 3 (- 9 6)"));
-console.log("Expected: 4928, recieved:", calc("* (+ 425 23) - (14 * / 2 4 6)"));
+console.log("Expected: 4928, recieved:", calc("* (+ 425 23) - 14 * / 2 4 6"));
 console.log("Expected: undefined, recieved:", calc("+ 5 5 5"));
 console.log("Expected: undefined, recieved:", calc("2 / 4"));
 console.log("Expected: undefined, recieved:", calc("/ 10 * 5 + 4"));
