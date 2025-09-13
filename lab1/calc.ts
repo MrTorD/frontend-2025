@@ -44,14 +44,14 @@ function calc(expression: string | undefined) : number | undefined {
         }
 
         if (num) stack.push(num);
-        if (ch!) handleChar(ch, stack);
+        if (ch!) handleChar(ch, stack, expression);
     }
 
     const result: number | undefined = stack.pop();
     return (result && stack.length == 0) ? result : undefined;
 }
 
-function handleChar(ch: string | undefined, stack: number[]) : boolean {
+function handleChar(ch: string | undefined, stack: number[], expression) : boolean {
     if (!ch) return false;
 
     let a: number | undefined;
@@ -64,6 +64,11 @@ function handleChar(ch: string | undefined, stack: number[]) : boolean {
             stack.push(a! + b!);
             break;
         case '-':
+            if (!isNaN(parseInt(expression[0]))) {
+                a = stack.pop();
+                stack.push(a!);
+                break;
+            }
             a = stack.pop();
             b = stack.pop();
             stack.push(a! - b!);
