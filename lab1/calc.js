@@ -48,12 +48,12 @@ function calc(expression) {
         if (num)
             stack.push(num);
         if (ch)
-            handleChar(ch, stack, expression);
+            handleChar(ch, stack);
     }
     const result = stack.pop();
     return (!Number.isNaN(result) && stack.length == 0) ? result : undefined;
 }
-function handleChar(ch, stack, expression) {
+function handleChar(ch, stack) {
     if (!ch)
         return false;
     let a;

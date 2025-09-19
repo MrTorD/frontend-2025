@@ -74,7 +74,7 @@ type Presentation = {
 };
 
 type Slide = {
-    index: number;
+    index: number; //использовать id: string
     slideObjects: SlideObject[];
     background: Picture | Color;
 }
@@ -126,6 +126,10 @@ function findSlide(p: Presentation, i: number) : Slide | undefined {
 
 function changeName(p: Presentation, name: string) {
     p.name = name;
+    return {
+        ...p,
+        name,
+    }
 }
 
 function addSlide(p: Presentation, index: number, background: Color | Picture) {

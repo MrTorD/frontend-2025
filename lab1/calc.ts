@@ -47,14 +47,14 @@ function calc(expression: string | undefined) : number | undefined {
         }
 
         if (num) stack.push(num);
-        if (ch!) handleChar(ch, stack, expression);
+        if (ch!) handleChar(ch, stack);
     }
 
     const result: number | undefined = stack.pop();
     return (!Number.isNaN(result) && stack.length == 0) ? result : undefined;
 }
 
-function handleChar(ch: string | undefined, stack: number[], expression: string) : boolean {
+function handleChar(ch: string | undefined, stack: number[]) : boolean {
     if (!ch) return false;
 
     let a: number | undefined;
