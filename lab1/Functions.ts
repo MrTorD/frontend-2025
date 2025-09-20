@@ -45,7 +45,9 @@ export function addText(p: Presentation, sId: string, x: number, y: number, w: n
     const slides = p.slides;
     let slide = p.slides.find((s) => s.id == sId);
     if (slide) {
+        const i = slides.indexOf(slide);
         slide = {...slide, slideObjects: [...slide.slideObjects, t]};
+        slides[i] = slide;
         return {
             ...p,
             slides
@@ -58,7 +60,9 @@ export function deleteObj(p: Presentation, sId: string, objId: string) : Present
     const slides = p.slides;
     const slide = p.slides.find(s => s.id == sId);
     if (slide) {
+        const i = slides.indexOf(slide);
         slide.slideObjects = slide.slideObjects.filter(o => o.id != objId);
+        slides[i] = slide;
         return {
             ...p,
             slides
@@ -73,7 +77,9 @@ export function addImage(p: Presentation, sId: string, x: number, y: number, w: 
     const slides = p.slides;
     let slide = p.slides.find((s) => s.id == sId);
     if (slide) {
+        const i = slides.indexOf(slide);
         slide = {...slide, slideObjects: [...slide.slideObjects, image]};
+        slides[i] = slide;
         return {
             ...p,
             slides

@@ -51,9 +51,10 @@ if (sId1 && sId2) {
     select.slidesId.forEach(sId => {
         p = (0, Functions_js_1.changeBackground)(p, sId, '#405060', 'color');
     });
+    console.log("Slides before changing position: ", p.slides);
     p = (0, Functions_js_1.changeSlidePosition)(p, sId1, sId2);
-    console.log(p);
+    console.log("Slides before after position: ", p.slides);
+    console.log("Slides before removing: ", p.slides);
     p = (0, Functions_js_1.removeSlide)(p, p.slides[0].id);
-    console.log(p);
+    console.log("Slides: ", p.slides);
 }
-//# sourceMappingURL=TestsForPresentation.js.map

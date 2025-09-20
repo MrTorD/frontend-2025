@@ -84,4 +84,3 @@ function handleChar(ch, stack) {
     }
     return true;
 }
-//# sourceMappingURL=calc.js.map

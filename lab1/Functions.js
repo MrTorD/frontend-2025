@@ -51,7 +51,9 @@ function addText(p, sId, x, y, w, h, text, font, size) {
     const slides = p.slides;
     let slide = p.slides.find((s) => s.id == sId);
     if (slide) {
+        const i = slides.indexOf(slide);
         slide = { ...slide, slideObjects: [...slide.slideObjects, t] };
+        slides[i] = slide;
         return {
             ...p,
             slides
@@ -63,7 +65,9 @@ function deleteObj(p, sId, objId) {
     const slides = p.slides;
     const slide = p.slides.find(s => s.id == sId);
     if (slide) {
+        const i = slides.indexOf(slide);
         slide.slideObjects = slide.slideObjects.filter(o => o.id != objId);
+        slides[i] = slide;
         return {
             ...p,
             slides
@@ -77,7 +81,9 @@ function addImage(p, sId, x, y, w, h, src) {
     const slides = p.slides;
     let slide = p.slides.find((s) => s.id == sId);
     if (slide) {
+        const i = slides.indexOf(slide);
         slide = { ...slide, slideObjects: [...slide.slideObjects, image] };
+        slides[i] = slide;
         return {
             ...p,
             slides
@@ -137,4 +143,3 @@ function changeBackground(p, sId, src, type) {
     }
     return p;
 }
-//# sourceMappingURL=Functions.js.map

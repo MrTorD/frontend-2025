@@ -46,6 +46,7 @@ if (sId1 && sId2) {
 
     const objId1 = p.slides[0]?.slideObjects[0]?.id;
     const objId2 = p.slides[1]?.slideObjects[1]?.id;
+
     select = {slidesId: [sId1!], objsInfo: [
         {slideId: sId1!, objId: objId1!},
         {slideId: sId2!, objId: objId2!}
@@ -78,13 +79,16 @@ if (sId1 && sId2) {
     select.slidesId.forEach(sId => {
         p = changeBackground(p, sId, '#405060', 'color');
     });
+    console.log("Slides before changing position: ", p.slides);
 
     p = changeSlidePosition(p, sId1!, sId2!);
 
-    console.log(p);
+    console.log("Slides before after position: ", p.slides);
+
+    console.log("Slides before removing: ", p.slides);
 
     p = removeSlide(p, p.slides[0]!.id);
 
-    console.log(p);
+    console.log("Slides: ", p.slides);
 }
 
