@@ -1,0 +1,30 @@
+.workingSpace {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 85vh;
+}
+
+.slidesList {
+    display: flex;
+    flex-direction: column;
+    margin: 150 150 150 150;
+}
+
+.workingZone {
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    margin: 1500 1500;
+}
+
+.backgroundMinImg {
+    height: 250px;
+    width: 400px;
+}
+
+.backgroundMinColor {
+    height: 250px;
+    width: 400px;
+}
