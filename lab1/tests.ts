@@ -12,9 +12,9 @@ import {
     changeTextSize,
     changeFont,
     changeBackground,
-} from "./Functions.js";
+} from "./functions.js";
 
-import { Presentation, Selection} from "./Types.js";
+import { Presentation, Selection} from "./types.js";
 
 let minP : Presentation = createPresentation('MinimalPresentation');
 minP = changeName(minP, 'minPresentation');

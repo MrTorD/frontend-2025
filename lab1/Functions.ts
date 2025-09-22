@@ -1,4 +1,4 @@
-import {Presentation, Slide, TextField, Color, Picture, ImageField, Object} from "./Types.js"
+import {Presentation, Slide, TextField, Color, Picture, ImageField, Object} from "./types.js"
 
 export function createPresentation(name: string) : Presentation {
     return {name, slides: []};
