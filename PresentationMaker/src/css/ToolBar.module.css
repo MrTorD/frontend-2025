@@ -4,6 +4,11 @@
     height: 5vh;
 }
 
+.form {
+    margin: auto 0 auto auto;
+}
+
 .label {
+    padding: 10 10 10 10;
     margin: auto 0 auto auto;
 }

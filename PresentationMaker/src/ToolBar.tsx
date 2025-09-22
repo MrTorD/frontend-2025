@@ -21,7 +21,7 @@ function ToolBar(props: ToolBarProps) {
         <button onClick={() => console.log('Вы нажали кнопку "Вставить"')}>
             Вставить
         </button>
-        <form>
+        <form className={styles.form}>
             <label className={styles.label}>
                 Изменить название презентации
                 <input defaultValue={p.name} type='text' name='PresentationName'></input>
