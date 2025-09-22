@@ -12,9 +12,9 @@ import {
     changeTextSize,
     changeFont,
     changeBackground,
-} from "./Functions.js";
+} from "./functions.js";
 
-import { Presentation, Selection} from "./Types.js";
+import { Presentation, Selection} from "./types.js";
 
 let minP : Presentation = createPresentation('MinimalPresentation');
 minP = changeName(minP, 'minPresentation');
@@ -74,7 +74,7 @@ if (sId1 && sId2) {
         }
     });
 
-    console.log(p);
+    console.log(p.slides);
 
     select.slidesId.forEach(sId => {
         p = changeBackground(p, sId, '#405060', 'color');

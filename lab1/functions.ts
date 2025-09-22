@@ -1,4 +1,4 @@
-import {Presentation, Slide, TextField, Color, Picture, ImageField, Object} from "./Types.js"
+import {Presentation, Slide, TextField, Color, Picture, ImageField, Object} from "./types.js"
 
 export function createPresentation(name: string) : Presentation {
     return {name, slides: []};
@@ -12,7 +12,7 @@ export function changeName(p: Presentation, name: string) : Presentation {
 }
 
 export function addSlide(p: Presentation, background: Color | Picture) : Presentation {
-    const slide: Slide = {id: crypto.randomUUID(), background, slideObjects: []};
+    const slide: Slide = {id: crypto.randomUUID(), background: {...background}, slideObjects: []};
     return {...p, slides: [...p.slides, slide]};
 }
 
