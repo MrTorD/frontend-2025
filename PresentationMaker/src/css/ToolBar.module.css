@@ -1,9 +1,0 @@
-.toolbar {
-    display: flex;
-    justify-content: flex-start;
-    height: 5vh;
-}
-
-.label {
-    margin: auto 0 auto auto;
-}
