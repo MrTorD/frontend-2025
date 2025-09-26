@@ -58,6 +58,7 @@ export function changeSlidePosition(
   return p;
 }
 
+<<<<<<< HEAD:lab1/Functions.ts
 export function addText(
   p: Presentation,
   sId: string,
@@ -83,6 +84,11 @@ export function addText(
     };
   }
   return p;
+=======
+export function addSlide(p: Presentation, background: Color | Picture) : Presentation {
+    const slide: Slide = {id: crypto.randomUUID(), background: {...background}, slideObjects: []};
+    return {...p, slides: [...p.slides, slide]};
+>>>>>>> 89c0902e88d04c50277ef2d37112a57d3e925232:lab1/functions.ts
 }
 
 export function deleteObj(

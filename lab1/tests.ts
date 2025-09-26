@@ -138,7 +138,11 @@ if (sId1 && sId2) {
     }
   });
 
+<<<<<<< HEAD
   console.log(p);
+=======
+    console.log(p.slides);
+>>>>>>> 89c0902e88d04c50277ef2d37112a57d3e925232
 
   select.slidesId.forEach((sId) => {
     p = changeBackground(p, sId, "#405060", "color");
